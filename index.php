@@ -34,7 +34,7 @@ if ($_POST ['search']) {
                     center: [55.76, 37.64],
                     zoom: 2
                 });
-                myMap.setBounds([[<?=$min_shirota?>,<?=$min_dolgota?>], [<?=$max_shirota?>,<?=$max_dolgota?>]]);
+                myMap.setBounds([[<?=$min_shirota?>,<?=$min_dolgota?>], [<?=$max_shirota?>,<?=$max_dolgota?>]],{checkZoomRange: true,});
                 <?php
                 foreach ($collection as $item) {
                     $adres = $item->getAddress(); // вернет адрес
