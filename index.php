@@ -10,6 +10,20 @@ if ($_POST ['search']) {
     $collection = $response->getList();
     echo '<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript">
     </script>';
+    //print_r($response);
+    $min_shirota = 1000;
+    $min_dolgota = 1000;
+    $max_shirota = 0;
+    $max_dolgota = 0;
+    foreach ($collection as $item) {
+        $shirota = $item->getLatitude(); // широта
+        $dolgota = $item->getLongitude(); // долгота
+        if($shirota>$max_shirota)$max_shirota=$shirota;
+        if($dolgota>$max_dolgota)$max_dolgota=$dolgota;
+
+        if($shirota<$min_shirota)$min_shirota=$shirota;
+        if($dolgota<$min_dolgota)$min_dolgota=$dolgota;
+    }
     ?>
         <div id="map" style="width: 700px; height: 500px"></div>
         <script type="text/javascript">
@@ -20,7 +34,8 @@ if ($_POST ['search']) {
                     center: [55.76, 37.64],
                     zoom: 2
                 });
-                <?
+                myMap.setBounds([[<?=$min_shirota?>,<?=$min_dolgota?>], [<?=$max_shirota?>,<?=$max_dolgota?>]]);
+                <?php
                 foreach ($collection as $item) {
                     $adres = $item->getAddress(); // вернет адрес
                     $shirota = $item->getLatitude(); // широта
@@ -30,12 +45,12 @@ if ($_POST ['search']) {
                         hintContent: '<?=$adres?>',
                         balloonContent: '<?=$adres?>'
                     }));
-                    <?
+                    <?php
                 }
                 ?>
             }
         </script>
-    <?
+    <?php
     foreach ($collection as $item) {
         $adres = $item->getAddress(); // вернет адрес
         $shirota = $item->getLatitude(); // широта
