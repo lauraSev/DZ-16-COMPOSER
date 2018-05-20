@@ -64,10 +64,11 @@ if ($_POST ['search']) {
         echo '<br><br>';
     }
 };
-echo '<form action="index.php" method="post">';
-echo '<input type="text" name="adres" placeholder="Введите адрес">&nbsp;';
-echo '<input type="submit" name="search" value="Найти"> ';
-echo '</form>';
-
 ?>
+<form action="index.php" method="post">
+<input type="text" name="adres" placeholder="Введите адрес"><br>
+<input type="submit" name="search" value="Найти">
+</form>
+
+
 </body>
