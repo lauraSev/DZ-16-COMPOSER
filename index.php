@@ -69,6 +69,4 @@ if ($_POST ['search']) {
 <input type="text" name="adres" placeholder="Введите адрес"><br>
 <input type="submit" name="search" value="Найти">
 </form>
-
-
 </body>
